@@ -1,0 +1,57 @@
+.video-principal {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #7d87a5;
+  margin-top: 20vh;
+}
+.video {
+  margin-left: 2vw;
+}
+
+.hombre-luna {
+  height: 23vh;
+  width: 22vw;
+  border-radius: 20px;
+}
+
+.titulo-video {
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.video-caracteristicas {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  list-style: none;
+}
+
+.caract-principales {
+  width: 22%;
+}
+
+.caract-principales-label {
+  margin-left: 6px;
+}
+
+.definicion {
+  width: 35%;
+  margin-left: -2vw;
+  margin-bottom: 5vh;
+}
+
+.lista {
+  width: 23%;
+  ul {
+  list-style: none;
+  }
+}
+
+.like {
+  width: 17%;
+}
+.user-lista {
+  font-size: 15px;
+  padding: 0px;
+}

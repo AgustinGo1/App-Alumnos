@@ -1,0 +1,32 @@
+section.sidebar {
+    background: #8990c7;
+    width: 15vw;
+    color: white;
+    font-size: 18px;
+    border-radius: 15px;
+    margin-top: 8vh;
+
+  aside {
+    padding: 25px 0px;
+    header {
+      display: flex;
+      align-items: center;
+      margin-left: 1.6vw;
+    }
+    ul {
+        list-style: none;
+        li {
+          padding: 10px;
+          label {
+            margin-left: 5px;
+          }
+        }
+        div {
+          &.icon {
+            display: contents;
+
+          }
+        }
+    }
+  }
+}
