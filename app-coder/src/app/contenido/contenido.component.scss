@@ -55,3 +55,58 @@
   font-size: 15px;
   padding: 0px;
 }
+
+.listaAlumnos {
+  display: flex;
+  h1 {
+    font-size: 25px;
+    color: #7d87a5;
+    font-weight: 600;
+    padding-left: 8vh;
+    padding-top: 4vh;
+  }
+  .NoLoVieron {
+    .listaNoVistos{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2vh;
+      height: 27vh;
+      #alumnos {
+        padding: 3px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #40475d;
+      }
+    }
+
+  }
+  .loVieron {
+    .listaVistos{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2vh;
+      height: 27vh;
+      #personas {
+        padding: 3px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #40475d;
+      }
+    }
+
+  }
+
+}
+.addAlumno {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  button {
+    height: 35px;
+    margin-left: 8vh;
+    background: #3d4ed5;
+    color: white;
+  }
+}

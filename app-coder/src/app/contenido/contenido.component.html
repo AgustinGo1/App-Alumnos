@@ -50,3 +50,25 @@
       </ul>
   </div>
 </section>
+
+<section class="listaAlumnos">
+  <div class="NoLoVieron">
+    <div>
+      <h1>Alumnos que no vieron este video</h1>
+    </div>
+    <div class="listaNoVistos">
+      <div id="alumnos" *ngFor="let alumno of listaAlumnos">{{alumno}}</div>
+    </div>
+  </div>
+  <div class="loVieron" *ngIf="visto">
+    <div>
+      <h1>Alumnos que ya vieron este video</h1>
+    </div>
+    <div class="listaVistos" >
+      <div id="personas" *ngFor="let persona of listaVisualizados">{{persona}}</div>
+    </div>
+  </div>
+</section>
+<div class="addAlumno">
+  <button (click)="AddAlumno()">Vi este video</button>
+</div>
