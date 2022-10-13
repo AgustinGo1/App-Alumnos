@@ -1,8 +1,11 @@
 #body{
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 #form {
+  height: 60%;
   background: #006200ba;
   display: flex;
   flex-direction: column;
