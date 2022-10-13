@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 
@@ -31,9 +32,31 @@ export class AlumnosComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   @ViewChild(MatTable) table!: MatTable<PeriodicElement>
-  constructor() { }
+
+  public clickAgregar = false;
+  public formNuevoAlumno!: FormGroup;
+
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.formNuevoAlumno = this.formBuilder.group({
+      usuario: ['',
+        [
+          Validators.required,
+        ]
+      ],
+      email: ['',
+        Validators.required,
+      ],
+      contraseña:['',
+        Validators.required,
+        Validators.minLength(8)
+      ],
+      contraseña2: ['',
+        Validators.required,
+      ]
+    });
   }
 
 
@@ -45,4 +68,10 @@ export class AlumnosComponent implements OnInit {
       }
     }
   }
+
+  public agregarAlumno() {
+    this.clickAgregar = true;
+  }
+
+  public getErrorMessage() {}
 }

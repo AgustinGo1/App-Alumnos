@@ -32,5 +32,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <button mat-raised-button color="accent" class="addAlumno">Agregar</button>
+  <button mat-raised-button color="accent" class="addAlumno"(click)="agregarAlumno()">Agregar</button>
+  <div class="formulario" *ngIf="clickAgregar">
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" [formGroup]="formNuevoAlumno" required>
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+      </mat-form-field>
+    </div>
+  </div>
 </div>

@@ -1,8 +1,11 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlumnosComponent } from './alumnos.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 
@@ -12,7 +15,10 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [
     CommonModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [AlumnosComponent]
 })
