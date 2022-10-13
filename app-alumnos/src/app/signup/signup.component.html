@@ -1,9 +1,9 @@
-<section>
-  <h1>Registro</h1>
-</section>
-
-<form [formGroup]="formSignup" (submit)="iniciarSesion()">
-  <section>
+<div id="body">
+<form [formGroup]="formSignup" (submit)="iniciarSesion()" id="form">
+  <div class="title">
+    <h2>Inicia sesión o registrate</h2>
+  </div>
+  <section class="background">
     <div class="form">
       <label for="">Ingresá un usuario</label>
       <input type="text" placeholder="Usuario" formControlName="usuario">
@@ -34,7 +34,7 @@
     </div>
   </section>
   <footer>
-    <button type="button" class="btn btn-dark" [disabled]="formSignup.invalid">Iniciar sesión</button>
+    <button type="button" class="btn btn-dark" [disabled]="formSignup.invalid" (click)="iniciarSesion()">Iniciar sesión</button>
   </footer>
 </form>
-
+</div>

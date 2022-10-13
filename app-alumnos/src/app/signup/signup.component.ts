@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
 
 
   public iniciarSesion() {
-    console.log('kb', this.formSignup.value);
+    console.log('inicie sesion jeje');
 
   }
 
