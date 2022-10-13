@@ -1,4 +1,3 @@
-import { ToolbarRoutingModule } from './toolbar-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './toolbar.component';
@@ -9,7 +8,6 @@ import { ToolbarComponent } from './toolbar.component';
   declarations: [ToolbarComponent],
   imports: [
     CommonModule,
-    ToolbarRoutingModule
   ],
   exports: [ToolbarComponent]
 })
