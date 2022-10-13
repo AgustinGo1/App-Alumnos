@@ -2,6 +2,7 @@ import { SidebarsRoutingModule } from './sidebar-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -9,7 +10,8 @@ import { SidebarComponent } from './sidebar.component';
   declarations: [SidebarComponent],
   imports: [
     CommonModule,
-    SidebarsRoutingModule
+    SidebarsRoutingModule,
+    MatExpansionModule
   ],
   exports: [SidebarComponent]
 })

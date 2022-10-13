@@ -8,11 +8,20 @@ section.sidebar {
     padding: 25px 0px;
     header {
       display: flex;
-      align-items: center;
-      margin-left: 1.6vw;
+      justify-content: center;
+      h1 {
+        font-size: 30px;
+        font-weight: 500;
+        margin-top: 5px;
+      }
+      i {
+        font-size: 45px;
+      }
     }
     ul {
         list-style: none;
+        margin-top: 5vh;
+        margin-left: 2vw;
         li {
           padding: 10px;
           label {
