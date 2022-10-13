@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,8 @@ export class SignupComponent implements OnInit {
 
   public formSignup!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.formSignup = this.formBuilder.group({
@@ -35,7 +37,7 @@ export class SignupComponent implements OnInit {
 
   public iniciarSesion() {
     console.log('inicie sesion jeje');
-
+    this.router.navigateByUrl('/dashboard');
   }
 
 
