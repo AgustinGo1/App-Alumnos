@@ -35,25 +35,28 @@ export class AlumnosComponent implements OnInit {
 
   public clickAgregar = false;
   public formNuevoAlumno!: FormGroup;
+  public dni!: number;
+  public nombre!: string;
+  public edad!: number;
+  public email!:string;
 
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formNuevoAlumno = this.formBuilder.group({
-      usuario: ['',
+      dni: ['',
         [
           Validators.required,
         ]
       ],
+      nombre: ['',
+        Validators.required,
+      ],
+      edad:['',
+        Validators.required,
+      ],
       email: ['',
-        Validators.required,
-      ],
-      contraseña:['',
-        Validators.required,
-        Validators.minLength(8)
-      ],
-      contraseña2: ['',
         Validators.required,
       ]
     });
