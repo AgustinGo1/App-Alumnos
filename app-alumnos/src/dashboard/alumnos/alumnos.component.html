@@ -35,32 +35,35 @@
   <button mat-raised-button color="accent" class="addAlumno"(click)="agregarAlumno()">Agregar</button>
 </div>
 <div class="formulario" *ngIf="clickAgregar">
-  <div class="form">
-    <label for="">Ingresá tu DNI</label>
-    <input type="text" placeholder="DNI" formControlName="dni" [(ngModel)]="dni">
-    <div class="error">
-      <small *ngIf="formNuevoAlumno.get('dni')?.errors?.['required'] && formNuevoAlumno.get('dni')?.touched">El campo es requerido</small>
+  <form [formGroup]="formNuevoAlumno" >
+    <div class="form">
+      <label for="">Ingresá tu DNI</label>
+      <input type="text" placeholder="DNI" formControlName="dni" [(ngModel)]="dni">
+      <div class="error">
+        <small *ngIf="formNuevoAlumno.get('dni')?.errors?.['required'] && formNuevoAlumno.get('dni')?.touched">El campo es requerido</small>
+      </div>
     </div>
-  </div>
-  <div class="form">
-    <label for="">Ingresá tu nombre y apellido</label>
-    <input type="text" placeholder="Nombre y apellido" formControlName="nombre" [(ngModel)]="nombre">
-    <div class="error">
-      <small *ngIf="formNuevoAlumno.get('nombre')?.errors?.['required'] && formNuevoAlumno.get('nombre')?.touched">El campo es requerido</small>
+    <div class="form">
+      <label for="">Ingresá tu nombre y apellido</label>
+      <input type="text" placeholder="Nombre y apellido" formControlName="nombre" [(ngModel)]="nombre">
+      <div class="error">
+        <small *ngIf="formNuevoAlumno.get('nombre')?.errors?.['required'] && formNuevoAlumno.get('nombre')?.touched">El campo es requerido</small>
+      </div>
     </div>
-  </div>
-  <div class="form">
-    <label for="">Ingresá tu edad</label>
-    <input type="email" placeholder="Edad" formControlName="edad" [(ngModel)]="edad">
-    <div class="error">
-      <small *ngIf="formNuevoAlumno.get('edad')?.errors?.['required'] && formNuevoAlumno.get('edad')?.touched">El campo es requerido</small>
+    <div class="form">
+      <label for="">Ingresá tu edad</label>
+      <input type="email" placeholder="Edad" formControlName="edad" [(ngModel)]="edad">
+      <div class="error">
+        <small *ngIf="formNuevoAlumno.get('edad')?.errors?.['required'] && formNuevoAlumno.get('edad')?.touched">El campo es requerido</small>
+      </div>
     </div>
-  </div>
-  <div class="form">
-    <label for="">Ingresá una email</label>
-    <input type="password" placeholder="Email" formControlName="email" [(ngModel)]="email">
-    <div class="error">
-      <small *ngIf="formNuevoAlumno.get('email')?.errors?.['required'] && formNuevoAlumno.get('email')?.touched">El campo es requerido</small>
+    <div class="form">
+      <label for="">Ingresá una email</label>
+      <input type="password" placeholder="Email" formControlName="email" [(ngModel)]="email">
+      <div class="error">
+        <small *ngIf="formNuevoAlumno.get('email')?.errors?.['required'] && formNuevoAlumno.get('email')?.touched">El campo es requerido</small>
+      </div>
     </div>
-  </div>
+  </form>
+  <button mat-raised-button color="accent" class="addAlumno" (submit)="guardarAlumno()">Guardar</button>
 </div>

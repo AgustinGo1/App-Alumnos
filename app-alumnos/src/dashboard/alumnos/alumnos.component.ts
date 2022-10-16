@@ -10,6 +10,12 @@ export interface PeriodicElement {
   symbol: string;
 }
 
+export class NuevoAlumno  {
+  name!: string;
+  position!: number;
+  weight!: number;
+  symbol!: string;
+}
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 15963123, name: 'Carlitos Tevez', weight: 38, symbol: 'apache@gmail.com'},
   {position: 15963123, name: 'Diego Maradona', weight: 60, symbol: 'El10go@gmail.com'},
@@ -76,5 +82,13 @@ export class AlumnosComponent implements OnInit {
     this.clickAgregar = true;
   }
 
-  public getErrorMessage() {}
+  public guardarAlumno() {
+    const nuevoAlumno = new NuevoAlumno ();
+    nuevoAlumno.position = this.dni;
+    nuevoAlumno.name = this.nombre;
+    nuevoAlumno.weight = this.edad;
+    nuevoAlumno.symbol = this.email;
+    this.dataSource.push(nuevoAlumno);
+    this.table.renderRows();
+  }
 }
