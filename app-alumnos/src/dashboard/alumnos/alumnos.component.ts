@@ -90,5 +90,6 @@ export class AlumnosComponent implements OnInit {
     nuevoAlumno.symbol = this.email;
     this.dataSource.push(nuevoAlumno);
     this.table.renderRows();
+    this.clickAgregar = false;
   }
 }

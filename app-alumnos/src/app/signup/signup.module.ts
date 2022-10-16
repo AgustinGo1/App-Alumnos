@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { SignupRoutingModule } from './signup-routing.module';
 import { SignupComponent } from './signup.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SignupRoutingModule
+    SignupRoutingModule,
+    MatButtonModule
   ]
 })
 export class SignupModule { }
