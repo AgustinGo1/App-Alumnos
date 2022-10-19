@@ -35,7 +35,7 @@
   <button mat-raised-button color="accent" class="addAlumno"(click)="agregarAlumno()">Agregar</button>
 </div>
 <div class="formulario" *ngIf="clickAgregar">
-  <form [formGroup]="formNuevoAlumno" >
+  <!-- <form [formGroup]="formNuevoAlumno" >
     <div class="form">
       <label for="">Ingresá tu DNI</label>
       <input type="text" placeholder="DNI" formControlName="dni" [(ngModel)]="dni">
@@ -64,6 +64,52 @@
         <small *ngIf="formNuevoAlumno.get('email')?.errors?.['required'] && formNuevoAlumno.get('email')?.touched">El campo es requerido</small>
       </div>
     </div>
+  </form> -->
+  <form class="example-form" [formGroup]="formNuevoAlumno">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input  type="text" matInput  [errorStateMatcher]="matcher"
+             placeholder="39978629">
+      <mat-error *ngIf="formNuevoAlumno.hasError('dni') && !formNuevoAlumno.hasError('required')">
+        Ingresá un DNI válido.
+      </mat-error>
+      <mat-error *ngIf="formNuevoAlumno.hasError('required')">
+        El DNI es<strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width input" appearance="fill">
+      <mat-label>Nombre y apellido</mat-label>
+      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher"
+             placeholder="Agustin Goñi">
+      <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+        Ingresá tu nombre y apellido.
+      </mat-error>
+      <mat-error *ngIf="formNuevoAlumno.hasError('required')">
+        El nombre y apellido es<strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width input" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input  type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Ingresá un email válido.
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        El email es<strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width input" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input  type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Ingresá un email válido.
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        El email es<strong>requerido</strong>
+      </mat-error>
+    </mat-form-field> -->
   </form>
   <button mat-raised-button color="accent" class="addAlumno" (click)="guardarAlumno()">Guardar</button>
 </div>

@@ -1,6 +1,9 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { MatInput } from '@angular/material/input';
+import { ErrorStateMatcher } from '@angular/material/core';
+
 
 
 export interface PeriodicElement {
@@ -16,6 +19,14 @@ export class NuevoAlumno  {
   weight!: number;
   symbol!: string;
 }
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 15963123, name: 'Carlitos Tevez', weight: 38, symbol: 'apache@gmail.com'},
   {position: 15963123, name: 'Diego Maradona', weight: 60, symbol: 'El10go@gmail.com'},
@@ -37,11 +48,16 @@ export class AlumnosComponent implements OnInit {
   displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol', 'demo-action'];
   dataSource = ELEMENT_DATA;
 
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  dni = new FormControl('', [Validators.required, Validators.email]);
+
+  matcher = new MyErrorStateMatcher();
+
   @ViewChild(MatTable) table!: MatTable<PeriodicElement>
 
   public clickAgregar = false;
   public formNuevoAlumno!: FormGroup;
-  public dni!: number;
+  //public dni!: number;
   public nombre!: string;
   public edad!: number;
   public email!:string;
@@ -63,7 +79,10 @@ export class AlumnosComponent implements OnInit {
         Validators.required,
       ],
       email: ['',
-        Validators.required,
+        [
+          Validators.required,
+          Validators.email
+        ]
       ]
     });
   }
@@ -84,7 +103,7 @@ export class AlumnosComponent implements OnInit {
 
   public guardarAlumno() {
     const nuevoAlumno = new NuevoAlumno ();
-    nuevoAlumno.position = this.dni;
+    //nuevoAlumno.position = this.dni;
     nuevoAlumno.name = this.nombre;
     nuevoAlumno.weight = this.edad;
     nuevoAlumno.symbol = this.email;
