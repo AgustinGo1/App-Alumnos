@@ -1,8 +1,8 @@
 import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
-import { MatInput } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { NuevoAlumno } from './alumnos.domain';
 
 
 
@@ -11,13 +11,6 @@ export interface PeriodicElement {
   position: number;
   weight: number;
   symbol: string;
-}
-
-export class NuevoAlumno  {
-  name!: string;
-  position!: number;
-  weight!: number;
-  symbol!: string;
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -48,8 +41,7 @@ export class AlumnosComponent implements OnInit {
   displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol', 'demo-action'];
   dataSource = ELEMENT_DATA;
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  dni = new FormControl('', [Validators.required, Validators.email]);
+
 
   matcher = new MyErrorStateMatcher();
 
@@ -57,35 +49,22 @@ export class AlumnosComponent implements OnInit {
 
   public clickAgregar = false;
   public formNuevoAlumno!: FormGroup;
-  //public dni!: number;
+  public dni!: number;
   public nombre!: string;
   public edad!: number;
   public email!:string;
 
 
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
+  constructor(private formBuilder: FormBuilder) {
     this.formNuevoAlumno = this.formBuilder.group({
-      dni: ['',
-        [
-          Validators.required,
-        ]
-      ],
-      nombre: ['',
-        Validators.required,
-      ],
-      edad:['',
-        Validators.required,
-      ],
-      email: ['',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ]
+      dni: new FormControl('', [Validators.required, Validators.minLength(7)]),
+      nombre: new FormControl('', Validators.required),
+      edad:new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
     });
-  }
+   }
+
+  ngOnInit(): void { }
 
 
   public borrar(ev: any) {
@@ -103,12 +82,16 @@ export class AlumnosComponent implements OnInit {
 
   public guardarAlumno() {
     const nuevoAlumno = new NuevoAlumno ();
-    //nuevoAlumno.position = this.dni;
+    nuevoAlumno.position = this.dni;
     nuevoAlumno.name = this.nombre;
     nuevoAlumno.weight = this.edad;
     nuevoAlumno.symbol = this.email;
     this.dataSource.push(nuevoAlumno);
     this.table.renderRows();
     this.clickAgregar = false;
+  }
+
+  public modificarAlumno() {
+
   }
 }
