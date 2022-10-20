@@ -26,7 +26,7 @@
 
     <ng-container matColumnDef="demo-action">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let element"> <div class="buttons">  <button mat-raised-button color="primary">Modificar</button> <button mat-raised-button color="warn" (click)="borrar(element.name)">Borrar</button></div></td>
+      <td mat-cell *matCellDef="let element"> <div class="buttons">  <button mat-raised-button color="primary" (click)="modificarAlumno(element)">Modificar</button> <button mat-raised-button color="warn" (click)="borrar(element.name)">Borrar</button></div></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -38,42 +38,42 @@
   <form class="example-form" [formGroup]="formNuevoAlumno">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>DNI</mat-label>
-      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni" [(ngModel)]="dni">
-      <mat-error *ngIf="formNuevoAlumno.hasError('dni') && !formNuevoAlumno.hasError('required')">
+      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('dni') && !formNuevoAlumno.hasError('required')">
         Ingresá un DNI válido.
-      </mat-error>
+      </mat-error> -->
       <mat-error *ngIf="formNuevoAlumno.hasError('required')">
-        El DNI es<strong>requerido</strong>
+        El DNI es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width input" appearance="outline">
       <mat-label>Nombre y apellido</mat-label>
-      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="Agustin Goñi" formControlName="nombre" [(ngModel)]="nombre">
-      <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="Agustin Goñi" formControlName="nombre">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
         Ingresá tu nombre y apellido.
-      </mat-error>
+      </mat-error> -->
       <mat-error *ngIf="formNuevoAlumno.hasError('required')">
-        El nombre y apellido es<strong>requerido</strong>
+        El nombre y apellido es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width input" appearance="outline">
       <mat-label>Edad</mat-label>
-      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="25" formControlName="edad" [(ngModel)]="edad">
-      <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="25" formControlName="edad">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
         Ingresá tu nombre y apellido.
-      </mat-error>
+      </mat-error> -->
       <mat-error *ngIf="formNuevoAlumno.hasError('required')">
-        El nombre y apellido es<strong>requerido</strong>
+        La edad es <strong>requerida</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width input" appearance="outline">
       <mat-label>Email</mat-label>
-      <input  type="email" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="agustin@gmail.com" formControlName="email" [(ngModel)]="email">
-      <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+      <input  type="email" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="agustin@gmail.com" formControlName="email">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
         Ingresá tu nombre y apellido.
-      </mat-error>
-      <mat-error *ngIf="formNuevoAlumno.hasError('required')">
-        El nombre y apellido es<strong>requerido</strong>
+      </mat-error> -->
+      <mat-error >
+        El email es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
   </form>

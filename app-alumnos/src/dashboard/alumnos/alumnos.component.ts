@@ -49,10 +49,6 @@ export class AlumnosComponent implements OnInit {
 
   public clickAgregar = false;
   public formNuevoAlumno!: FormGroup;
-  public dni!: number;
-  public nombre!: string;
-  public edad!: number;
-  public email!:string;
 
 
   constructor(private formBuilder: FormBuilder) {
@@ -62,6 +58,7 @@ export class AlumnosComponent implements OnInit {
       edad:new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
     });
+    ;
    }
 
   ngOnInit(): void { }
@@ -82,16 +79,23 @@ export class AlumnosComponent implements OnInit {
 
   public guardarAlumno() {
     const nuevoAlumno = new NuevoAlumno ();
-    nuevoAlumno.position = this.dni;
-    nuevoAlumno.name = this.nombre;
-    nuevoAlumno.weight = this.edad;
-    nuevoAlumno.symbol = this.email;
-    this.dataSource.push(nuevoAlumno);
-    this.table.renderRows();
-    this.clickAgregar = false;
+    nuevoAlumno.position = this.formNuevoAlumno.get('dni')?.getRawValue();
+    nuevoAlumno.name = this.formNuevoAlumno.get('nombre')?.getRawValue();
+    nuevoAlumno.weight = this.formNuevoAlumno.get('edad')?.getRawValue();
+    nuevoAlumno.symbol = this.formNuevoAlumno.get('email')?.getRawValue();
+    if (nuevoAlumno) {
+      this.dataSource.push(nuevoAlumno);
+      this.table.renderRows();
+      this.clickAgregar = false;
+    }
+    else {
+      alert('Completa todos los campos por favor');
+    }
   }
 
-  public modificarAlumno() {
+  public modificarAlumno(element: PeriodicElement) {
+    this.formNuevoAlumno.setValue(element);
+    this.clickAgregar = true;
 
   }
 }
