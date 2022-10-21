@@ -21,15 +21,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 15963123, name: 'Carlitos Tevez', weight: 38, symbol: 'apache@gmail.com'},
-  {position: 15963123, name: 'Diego Maradona', weight: 60, symbol: 'El10go@gmail.com'},
-  {position: 15963123, name: 'Lionel Messi', weight: 35, symbol: 'messias@gmail.com'},
-  {position: 15963123, name: 'Roman Riquelme', weight: 38, symbol: 'juanRomanRiquelme@gmail.com'},
-  {position: 15963123, name: 'Martin Palermo', weight: 38, symbol: 'locoPalermo@gmail.com'},
-  {position: 15963123, name: 'Angel Di Maria', weight: 35, symbol: 'fideo@gmail.com'},
-  {position: 15963123, name: 'Rolando Schiavi', weight: 45, symbol: 'elhachaSchiavi@gmail.com'},
-  {position: 15963123, name: 'Hugo Ibarra', weight: 40, symbol: 'negritoIbarrra@gmail.com'},
-  {position: 15963123, name: 'Roberto Abbondanzieri', weight: 50, symbol: 'elpaaato@gmail.com'},
+  {position: 17232542, name: 'Carlitos Tevez', weight: 38, symbol: 'apache@gmail.com'},
+  {position: 15232555, name: 'Diego Maradona', weight: 60, symbol: 'El10go@gmail.com'},
+  {position: 16454333, name: 'Lionel Messi', weight: 35, symbol: 'messias@gmail.com'},
+  {position: 18454898, name: 'Roman Riquelme', weight: 38, symbol: 'juanRomanRiquelme@gmail.com'},
+  {position: 17454888, name: 'Martin Palermo', weight: 38, symbol: 'locoPalermo@gmail.com'},
+  {position: 15971325, name: 'Angel Di Maria', weight: 35, symbol: 'fideo@gmail.com'},
+  {position: 17561238, name: 'Rolando Schiavi', weight: 45, symbol: 'elhachaSchiavi@gmail.com'},
+  {position: 19897201, name: 'Hugo Ibarra', weight: 40, symbol: 'negritoIbarrra@gmail.com'},
+  {position: 22565871, name: 'Roberto Abbondanzieri', weight: 50, symbol: 'elpaaato@gmail.com'},
 ];
 
 @Component({
@@ -49,6 +49,8 @@ export class AlumnosComponent implements OnInit {
 
   public clickAgregar = false;
   public formNuevoAlumno!: FormGroup;
+  public formModificarAlm!: FormGroup;
+  public actulizarAlum = false
 
 
   constructor(private formBuilder: FormBuilder) {
@@ -58,7 +60,6 @@ export class AlumnosComponent implements OnInit {
       edad:new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
     });
-    ;
    }
 
   ngOnInit(): void { }
@@ -93,9 +94,26 @@ export class AlumnosComponent implements OnInit {
     }
   }
 
-  public modificarAlumno(element: PeriodicElement) {
-    this.formNuevoAlumno.setValue(element);
-    this.clickAgregar = true;
-
+  public modificarAlumno(element: any) {
+    this.actulizarAlum = true;
+    this.formModificarAlm = this.formBuilder.group({
+      dni: new FormControl(element.position, [Validators.required, Validators.minLength(7)]),
+      nombre: new FormControl(element.name , Validators.required),
+      edad:new FormControl(element.weight , Validators.required),
+      email: new FormControl(element.symbol , [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
+    });
   }
+
+  public actualizarAlumno (ev: any) {
+    this.dataSource.forEach((d) => {
+      if(d.position === ev.dni){
+        d.name = ev.nombre;
+        d.weight = ev.edad;
+        d.symbol = ev.email;
+      }
+    })
+    this.table.renderRows();
+    this.actulizarAlum = false;
+  }
+
 }

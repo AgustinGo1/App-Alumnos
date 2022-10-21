@@ -34,15 +34,17 @@
   </table>
   <button mat-raised-button color="accent" class="addAlumno"(click)="agregarAlumno()">Agregar</button>
 </div>
+
+
 <div class="formulario" *ngIf="clickAgregar">
   <form class="example-form" [formGroup]="formNuevoAlumno">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>DNI</mat-label>
-      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni">
+      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni" >
       <!-- <mat-error *ngIf="formNuevoAlumno.hasError('dni') && !formNuevoAlumno.hasError('required')">
         Ingresá un DNI válido.
       </mat-error> -->
-      <mat-error *ngIf="formNuevoAlumno.hasError('required')">
+      <mat-error>
         El DNI es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
@@ -52,7 +54,7 @@
       <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
         Ingresá tu nombre y apellido.
       </mat-error> -->
-      <mat-error *ngIf="formNuevoAlumno.hasError('required')">
+      <mat-error >
         El nombre y apellido es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
@@ -62,7 +64,7 @@
       <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
         Ingresá tu nombre y apellido.
       </mat-error> -->
-      <mat-error *ngIf="formNuevoAlumno.hasError('required')">
+      <mat-error>
         La edad es <strong>requerida</strong>
       </mat-error>
     </mat-form-field>
@@ -77,5 +79,49 @@
       </mat-error>
     </mat-form-field>
   </form>
-  <button mat-raised-button type="submit" [disabled]="formNuevoAlumno.invalid" color="accent" class="addAlumno" (click)="guardarAlumno()">Guardar</button>
+  <button mat-raised-button [disabled]="formNuevoAlumno.invalid" color="accent" class="addAlumno" (click)="guardarAlumno()">Guardar</button>
+</div>
+
+
+<div class="formulario" *ngIf="actulizarAlum">
+  <form class="example-form" [formGroup]="formModificarAlm">
+    <!-- <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>DNI</mat-label>
+      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni" [disabled]="true" >
+      <mat-error>
+        El DNI es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field> -->
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Nombre y apellido</mat-label>
+      <input  type="text" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="Agustin Goñi" formControlName="nombre">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+        Ingresá tu nombre y apellido.
+      </mat-error> -->
+      <mat-error >
+        El nombre y apellido es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Edad</mat-label>
+      <input  type="text" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="25" formControlName="edad">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+        Ingresá tu nombre y apellido.
+      </mat-error> -->
+      <mat-error>
+        La edad es <strong>requerida</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input  type="email" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="agustin@gmail.com" formControlName="email">
+      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
+        Ingresá tu nombre y apellido.
+      </mat-error> -->
+      <mat-error >
+        El email es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button  color="accent" class="addAlumno" (click)="actualizarAlumno(formModificarAlm.value)">Guardar</button>
 </div>
