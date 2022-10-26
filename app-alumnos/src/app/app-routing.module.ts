@@ -1,7 +1,7 @@
-import { DashboardComponent } from './../dashboard/dashboard.component';
+import { DashboardComponent } from './componentes/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './componentes/signup/signup.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,7 +17,7 @@ const routes: Routes = [{
   component: DashboardComponent,
   children: [{
     path: '',
-    loadChildren: () => import('../dashboard/dashboard.module').then( m => m.DashboardModule),
+    loadChildren: () => import('./componentes/dashboard/dashboard.module').then( m => m.DashboardModule),
   }]
 },
 ];

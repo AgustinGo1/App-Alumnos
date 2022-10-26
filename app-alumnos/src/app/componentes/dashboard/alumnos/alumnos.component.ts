@@ -1,10 +1,10 @@
-import { EstudiantesService } from './../../app/servicios/estudiantes.service';
-import { Estudiante } from './../../app/models/estudiantes.domain';
+import { EstudiantesService } from '../../../servicios/estudiantes.service';
+import { Estudiante } from '../../../models/estudiantes.domain';
 import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { NuevoAlumno } from './../../app/models/estudiantes.domain';
+import { NuevoAlumno } from '../../../models/estudiantes.domain';
 
 
 
