@@ -1,17 +1,19 @@
+import { EstudiantesService } from './../../app/servicios/estudiantes.service';
+import { Estudiante } from './../../app/models/estudiantes.domain';
 import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { NuevoAlumno } from './alumnos.domain';
+import { NuevoAlumno } from './../../app/models/estudiantes.domain';
 
 
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+// export interface PeriodicElement {
+//   name: string;
+//   position: number;
+//   weight: number;
+//   symbol: string;
+// }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,32 +22,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 17232542, name: 'Carlitos Tevez', weight: 38, symbol: 'apache@gmail.com'},
-  {position: 15232555, name: 'Diego Maradona', weight: 60, symbol: 'El10go@gmail.com'},
-  {position: 16454333, name: 'Lionel Messi', weight: 35, symbol: 'messias@gmail.com'},
-  {position: 18454898, name: 'Roman Riquelme', weight: 38, symbol: 'juanRomanRiquelme@gmail.com'},
-  {position: 17454888, name: 'Martin Palermo', weight: 38, symbol: 'locoPalermo@gmail.com'},
-  {position: 15971325, name: 'Angel Di Maria', weight: 35, symbol: 'fideo@gmail.com'},
-  {position: 17561238, name: 'Rolando Schiavi', weight: 45, symbol: 'elhachaSchiavi@gmail.com'},
-  {position: 19897201, name: 'Hugo Ibarra', weight: 40, symbol: 'negritoIbarrra@gmail.com'},
-  {position: 22565871, name: 'Roberto Abbondanzieri', weight: 50, symbol: 'elpaaato@gmail.com'},
-];
-
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',
   styleUrls: ['./alumnos.component.scss']
 })
 export class AlumnosComponent implements OnInit {
-  displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol', 'demo-action'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['demo-nombre', 'demo-apellido', 'demo-usuario', 'demo-action'];
+  dataSource: Estudiante[] = [];
 
 
 
   matcher = new MyErrorStateMatcher();
 
-  @ViewChild(MatTable) table!: MatTable<PeriodicElement>
+  @ViewChild(MatTable) table!: MatTable<Estudiante>
 
   public clickAgregar = false;
   public formNuevoAlumno!: FormGroup;
@@ -53,21 +43,28 @@ export class AlumnosComponent implements OnInit {
   public actulizarAlum = false
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private estuadiantesSrv: EstudiantesService) {
     this.formNuevoAlumno = this.formBuilder.group({
-      dni: new FormControl('', [Validators.required, Validators.minLength(7)]),
-      nombre: new FormControl('', Validators.required),
-      edad:new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', Validators.required),
+      usuario:new FormControl('', [Validators.required,Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')]),
+      //email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
     });
    }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.estuadiantesSrv.obtenerEstudiantes().subscribe(d => {
+      this.dataSource = d;
+    })
+  }
 
 
   public borrar(ev: any) {
+    console.log('entro', ev);
+
     for (let i = 0; i < this.dataSource.length; i++) {
-      if (this.dataSource[i].name === ev) {
+      if (this.dataSource[i].nombre === ev) {
         this.dataSource.splice(i,1);
         this.table.renderRows();
       }
@@ -80,10 +77,10 @@ export class AlumnosComponent implements OnInit {
 
   public guardarAlumno() {
     const nuevoAlumno = new NuevoAlumno ();
-    nuevoAlumno.position = this.formNuevoAlumno.get('dni')?.getRawValue();
-    nuevoAlumno.name = this.formNuevoAlumno.get('nombre')?.getRawValue();
-    nuevoAlumno.weight = this.formNuevoAlumno.get('edad')?.getRawValue();
-    nuevoAlumno.symbol = this.formNuevoAlumno.get('email')?.getRawValue();
+    nuevoAlumno.nombre = this.formNuevoAlumno.get('nombre')?.getRawValue();
+    nuevoAlumno.apellido = this.formNuevoAlumno.get('apellido')?.getRawValue();
+    nuevoAlumno.usuario = this.formNuevoAlumno.get('usuario')?.getRawValue();
+    //nuevoAlumno.contrasena = this.formNuevoAlumno.get('email')?.getRawValue();
     if (nuevoAlumno) {
       this.dataSource.push(nuevoAlumno);
       this.table.renderRows();
@@ -97,19 +94,21 @@ export class AlumnosComponent implements OnInit {
   public modificarAlumno(element: any) {
     this.actulizarAlum = true;
     this.formModificarAlm = this.formBuilder.group({
-      dni: new FormControl(element.position, [Validators.required, Validators.minLength(7)]),
-      nombre: new FormControl(element.name , Validators.required),
-      edad:new FormControl(element.weight , Validators.required),
-      email: new FormControl(element.symbol , [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
+      nombre: new FormControl(element.nombre, [Validators.required]),
+      apellido: new FormControl(element.apellido , Validators.required),
+      //usuario:new FormControl(element.usuario , [Validators.required, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')]),
+      //email: new FormControl(element.symbol , [Validators.required, Validators.email, Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')])
     });
   }
 
   public actualizarAlumno (ev: any) {
+    console.log('entro', ev);
+
     this.dataSource.forEach((d) => {
-      if(d.position === ev.dni){
-        d.name = ev.nombre;
-        d.weight = ev.edad;
-        d.symbol = ev.email;
+      if(d.usuario === ev.usuario){
+        d.apellido = ev.apellido;
+        d.nombre = ev.nombre;
+        // d.contrasena = ev.email;
       }
     })
     this.table.renderRows();

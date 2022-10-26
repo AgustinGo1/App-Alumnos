@@ -1,32 +1,32 @@
 <div class="content">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table tabla">
     <!-- Position Column -->
-    <ng-container matColumnDef="demo-position">
-      <th mat-header-cell *matHeaderCellDef> DNI </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <ng-container matColumnDef="demo-nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="demo-name">
-      <th mat-header-cell *matHeaderCellDef> Nombre y apellido </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <ng-container matColumnDef="demo-apellido">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="demo-weight">
-      <th mat-header-cell *matHeaderCellDef> Edad </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <ng-container matColumnDef="demo-usuario">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="demo-symbol">
+    <!-- <ng-container matColumnDef="demo-contraseña">
       <th mat-header-cell *matHeaderCellDef> Email </th>
       <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="demo-action">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let element"> <div class="buttons">  <button mat-raised-button color="primary" (click)="modificarAlumno(element)">Modificar</button> <button mat-raised-button color="warn" (click)="borrar(element.name)">Borrar</button></div></td>
+      <td mat-cell *matCellDef="let element"> <div class="buttons">  <button mat-raised-button color="primary" (click)="modificarAlumno(element)">Modificar</button> <button mat-raised-button color="warn" (click)="borrar(element.nombre)">Borrar</button></div></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -39,43 +39,24 @@
 <div class="formulario" *ngIf="clickAgregar">
   <form class="example-form" [formGroup]="formNuevoAlumno">
     <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>DNI</mat-label>
-      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni" >
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('dni') && !formNuevoAlumno.hasError('required')">
-        Ingresá un DNI válido.
-      </mat-error> -->
+      <mat-label>Nombre</mat-label>
+      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="Agustin" formControlName="nombre" >
       <mat-error>
-        El DNI es <strong>requerido</strong>
+        El nombre es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width input" appearance="outline">
-      <mat-label>Nombre y apellido</mat-label>
-      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="Agustin Goñi" formControlName="nombre">
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
-        Ingresá tu nombre y apellido.
-      </mat-error> -->
+      <mat-label>Apellido</mat-label>
+      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="Goñi" formControlName="apellido">
       <mat-error >
-        El nombre y apellido es <strong>requerido</strong>
+        El apellido es <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width input" appearance="outline">
-      <mat-label>Edad</mat-label>
-      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="25" formControlName="edad">
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
-        Ingresá tu nombre y apellido.
-      </mat-error> -->
+      <mat-label>Usuario o Email</mat-label>
+      <input  type="text" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="agus@gmail.com" formControlName="usuario">
       <mat-error>
-        La edad es <strong>requerida</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width input" appearance="outline">
-      <mat-label>Email</mat-label>
-      <input  type="email" matInput [formGroup]="formNuevoAlumno" [errorStateMatcher]="matcher" placeholder="agustin@gmail.com" formControlName="email">
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
-        Ingresá tu nombre y apellido.
-      </mat-error> -->
-      <mat-error >
-        El email es <strong>requerido</strong>
+        Usuario <strong>requerido</strong>
       </mat-error>
     </mat-form-field>
   </form>
@@ -85,43 +66,27 @@
 
 <div class="formulario" *ngIf="actulizarAlum">
   <form class="example-form" [formGroup]="formModificarAlm">
-    <!-- <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>DNI</mat-label>
-      <input  type="text" matInput  [errorStateMatcher]="matcher" placeholder="39978629" formControlName="dni" [disabled]="true" >
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Nombre </mat-label>
+      <input  type="text" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="Agustin Goñi" formControlName="nombre">
+      <mat-error >
+        El nombre es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Apellido</mat-label>
+      <input  type="text" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="25" formControlName="apellido">
       <mat-error>
-        El DNI es <strong>requerido</strong>
+        El apellido es <strong>requerido</strong>
+      </mat-error>
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width input" appearance="outline">
+      <mat-label>Usuario o email</mat-label>
+      <input  type="email" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="agustin@gmail.com" formControlName="usuario">
+      <mat-error >
+        El usuario es <strong>requerido</strong>
       </mat-error>
     </mat-form-field> -->
-    <mat-form-field class="example-full-width input" appearance="outline">
-      <mat-label>Nombre y apellido</mat-label>
-      <input  type="text" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="Agustin Goñi" formControlName="nombre">
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
-        Ingresá tu nombre y apellido.
-      </mat-error> -->
-      <mat-error >
-        El nombre y apellido es <strong>requerido</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width input" appearance="outline">
-      <mat-label>Edad</mat-label>
-      <input  type="text" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="25" formControlName="edad">
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
-        Ingresá tu nombre y apellido.
-      </mat-error> -->
-      <mat-error>
-        La edad es <strong>requerida</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width input" appearance="outline">
-      <mat-label>Email</mat-label>
-      <input  type="email" matInput [formGroup]="formModificarAlm" [errorStateMatcher]="matcher" placeholder="agustin@gmail.com" formControlName="email">
-      <!-- <mat-error *ngIf="formNuevoAlumno.hasError('nombre') && !formNuevoAlumno.hasError('required')">
-        Ingresá tu nombre y apellido.
-      </mat-error> -->
-      <mat-error >
-        El email es <strong>requerido</strong>
-      </mat-error>
-    </mat-form-field>
   </form>
   <button mat-raised-button  color="accent" class="addAlumno" (click)="actualizarAlumno(formModificarAlm.value)">Guardar</button>
 </div>
