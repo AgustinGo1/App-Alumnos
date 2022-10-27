@@ -1,3 +1,4 @@
+import { CursosComponent } from './cursos/cursos.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,8 @@ import { DashboardComponent } from './dashboard.component';
 
 export const routes: Routes = [
   {path: '', component: WelcomeComponent},
-  {path: 'alumnos', component: AlumnosComponent}
+  {path: 'alumnos', component: AlumnosComponent},
+  {path: 'cursos', component: CursosComponent}
 ];
 
 // @NgModule({

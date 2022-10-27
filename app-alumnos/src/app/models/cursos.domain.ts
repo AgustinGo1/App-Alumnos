@@ -1,12 +1,12 @@
 import { Estudiante } from "./estudiantes.domain";
 
-export interface Curso{
-    nombre: string;
-    comision: string;
-    profesor: string;
-    fechaInicio: Date;
-    fechaFin: Date;
-    inscripcionAbierta: boolean;
-    imagen: string;
-    estudiantes: Estudiante[];
+export class Curso{
+    nombre!: string;
+    comision!: string;
+    profesor!: string;
+    fechaInicio!: string;
+    fechaFin!: Date;
+    inscripcionAbierta!: boolean;
+    imagen!: string;
+    estudiantes!: Estudiante[];
 }

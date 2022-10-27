@@ -1,0 +1,12 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  .card {
+    max-width: 17vw;
+    margin: 10px;
+    img {
+      max-height: 40vh;
+    }
+  }
+}
+
